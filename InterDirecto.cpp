@@ -4,6 +4,7 @@ using namespace std;
 void imprimirArreglo(int[],int);
 void interDirDer(int[],int);
 void interDirIzq(int[],int);
+void interDirCen(int[],int); 
 
 int main() {
 	int n,op;
@@ -17,7 +18,9 @@ int main() {
 		cout<<"\nMetodos de Ordenacion"<<endl
 			<<"1. Intercambio Directo Derecha"<<endl
 			<<"2. Intercambio Directo Izquierda"<<endl
-			<<"3. Salir del programa"<<endl;
+			<<"3. Intercambio Directo con Centinela"<<endl
+			<<"4. Intercambio Directo Bidireccional"<<endl
+			<<"5. Salir del programa"<<endl;
 		cout<<"Ingrese una opcion: "; cin>>op;
 		switch (op) {
 			case 1:
@@ -29,8 +32,12 @@ int main() {
 				interDirIzq(arreglo,n-1);
 				imprimirArreglo(arreglo,n);
 				return 0;
+			case 3:
+				interDirCen(arreglo,n-1);
+				imprimirArreglo(arreglo,n);
+				return 0;
 		}
-	} while (op!=3);
+	} while (op!=5);
 	cout<<endl;
 }
 
@@ -57,6 +64,24 @@ void interDirIzq(int arr[],int n) {
 				arr[j]=aux;
 			}
 		}
+	}
+}
+
+void interDirCen(int arr[],int n) {
+	int cen=1; //Se continua con las iteraciones
+	int i=0;
+	int aux;
+	while(i<n && cen==1) {
+		cen=0; //No es necesario realizar mas iteraciones
+		for (int j=0;j<n-i;j++) {
+			if (arr[j]>arr[j+1]) {
+				aux=arr[j];
+				arr[j]=arr[j+1];
+				arr[j+1]=aux;
+				cen=1; 
+			}
+		}
+		i++;
 	}
 }
 	
