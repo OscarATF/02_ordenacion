@@ -3,6 +3,7 @@ using namespace std;
 
 void imprimirArreglo(int[],int);
 void interDirDer(int[],int);
+void interDirIzq(int[],int);
 
 int main() {
 	int n,op;
@@ -25,12 +26,12 @@ int main() {
 				return 0;
 				break;
 			case 2:
-				//interDirIzq();
-				break;
+				interDirIzq(arreglo,n-1);
+				imprimirArreglo(arreglo,n);
+				return 0;
 		}
-	}  while (op!=3);
+	} while (op!=3);
 	cout<<endl;
-	
 }
 
 void interDirDer(int arr[],int n) {
@@ -44,7 +45,19 @@ void interDirDer(int arr[],int n) {
 			}	
 		}
 	}
-	
+}
+
+void interDirIzq(int arr[],int n) {
+	int aux;
+	for (int i=1;i<=n;i++) {
+		for (int j=n;j>=i;j--) {         
+			if (arr[j]<arr[j-1]) {
+				aux=arr[j-1];
+				arr[j-1]=arr[j];
+				arr[j]=aux;
+			}
+		}
+	}
 }
 	
 void imprimirArreglo(int arr[],int n) {
