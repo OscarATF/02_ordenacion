@@ -46,26 +46,30 @@ int main() {
 	}
 }
 
+//seleccion directa
 void ordenaPos(int n,Personal p[]) {
-	Personal aux;
+	Personal menor;
 	int k;
-	for (int i=0;i<n;i++) {
-		aux=p[i];
-		k=i-1;
-		while (k>=0 && comparar(aux,p[k]))  {
-			p[k+1]=p[k];
-			k--;
+	for (int i=0;i<n-1;i++) {
+		menor=p[i];
+		k=i;
+		for (int j=i+1;j<n;j++) {
+			if (comparar(menor,p[j])) {
+				menor=p[j];
+				k=j;
+			}
 		}
-		p[k+1]=aux;
+		p[k]=p[i];
+		p[i]=menor;
 	}
 }
 
-bool comparar(Personal aux,Personal p) {
-	if (aux.nacim.anio<p.nacim.anio ||
-    	(aux.nacim.anio==p.nacim.anio && aux.nacim.mes<p.nacim.mes) ||
-        (aux.nacim.anio==p.nacim.anio && aux.nacim.mes==p.nacim.mes && aux.nacim.dia<p.nacim.dia)){
-        	return true;
-		} else {
-			return false;
-		}
+bool comparar(Personal menor, Personal p) {
+    if (menor.nacim.anio!=p.nacim.anio) {
+        return menor.nacim.anio>p.nacim.anio;
+    }
+    if (menor.nacim.mes!=p.nacim.mes) {
+        return menor.nacim.mes>p.nacim.mes;
+    }
+    return menor.nacim.dia>p.nacim.dia;
 }
